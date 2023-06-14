@@ -1,0 +1,13 @@
+import { orbitron, PixelPublic } from "@fonts";
+import { Ious, Notor } from "@styles/TitleStyles";
+
+const Words = () => {
+  return (
+    <>
+      <Notor className={orbitron.className}>NOTOR</Notor>
+      <Ious className={PixelPublic.className}>IOUS</Ious>
+    </>
+  )
+}
+
+export default Words
