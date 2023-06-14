@@ -6,8 +6,16 @@ El sistema propuesto de aprendizaje se basa en el uso de asociaciones inverosím
 ![Imagen del Proyecto](/public/images/Notorious.png)
 ![Imagen del Proyecto](/public/images/Notorious2.png)
 
+## Cómo se usa:
 
-## Cómo te ayudará Notorious:
+1. Escoges una palabra en inglés de la lista que tendrás al costado (son las mas importantes del bocabulario inglés)
+2. Apretar en generar
+3. Notorious buscará una palabra en español con cierta similitud a la palabra en inglés.
+4. Notorious generará una idea inverosímil con la palabra en español con cierta similitud en inglés, junto con la palabra traducida del inglés al español.
+5. Imaginas la idea inverosímil y las palabras estarán en tu memoria a largo plazo.
+
+
+## Cómo te ayuda Notorious:
 
 Algunos problemas que pueden surgir en el proceso de memorización sin Notorious:
 
