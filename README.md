@@ -7,7 +7,7 @@ El sistema propuesto de aprendizaje se basa en el uso de asociaciones inverosím
 ![Imagen del Proyecto](/public/images/Notorious2.png)
 
 
-##Como te ayudará Notorious:
+## Cómo te ayudará Notorious:
 
 Algunos problemas que pueden surgir en el proceso de memorización sin Notorious:
 
