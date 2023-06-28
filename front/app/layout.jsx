@@ -1,15 +1,15 @@
+import { Body } from "@components/Body"
 import "@styles/globals.css"
 import StyledComponentsRegistry from "@utils/registry"
-import landingStyles from "@styles/landingStyles.module.css";
 
 const layout = ({children}) => {
   return (
     <html lang="en">
-      <body className={landingStyles.body}>
+      <Body>
         <StyledComponentsRegistry>
           {children}
         </StyledComponentsRegistry>
-      </body>
+      </Body>
     </html>
   )
 }

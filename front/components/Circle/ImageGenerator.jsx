@@ -85,6 +85,7 @@ function ImageGenerator({index, color}) {
             src={`/images/Star${index}-${color}.svg`}
             height={500}
             width={500}
+            alt={`/images/Star${index}-${color}.svg`}
         />
     );
 }

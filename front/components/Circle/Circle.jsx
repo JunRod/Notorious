@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Container, } from "@styles/CircleStyles"
-import {AllStars} from "@styles/LightGreen";
+import {AllStars} from "@components/Circle/LightGreen";
 
 const Circle = () => {
 
