@@ -1,10 +1,11 @@
 import "@styles/globals.css"
 import StyledComponentsRegistry from "@utils/registry"
+import landingStyles from "@styles/landingStyles.module.css";
 
 const layout = ({children}) => {
   return (
     <html lang="en">
-      <body>
+      <body className={landingStyles.body}>
         <StyledComponentsRegistry>
           {children}
         </StyledComponentsRegistry>
@@ -14,5 +15,3 @@ const layout = ({children}) => {
 }
 
 export default layout
-
-//a
