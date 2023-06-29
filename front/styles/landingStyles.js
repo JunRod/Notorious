@@ -11,6 +11,7 @@ export const BodyStyles = styled.body`
   left: 0;
   top: 0;
   position: relative;
+  
   &::before {
     content: "";
     position: absolute;

@@ -20,6 +20,7 @@ export const Effect = styled.div`
 `
 
 export const ContainerButton = styled.div`
+  z-index: 30;
   display: flex;
   justify-content: center;
   align-items: center;

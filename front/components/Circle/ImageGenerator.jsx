@@ -28,7 +28,7 @@ const blurAnimarion2 = keyframes`
 const ImageStyled = styled(Image)`
   position: absolute;
   mix-blend-mode: screen;
-  animation: ${props => console.log(props)} 
+  animation: ${""}
   ${props => props.index % 2 === 0 ? blurAnimarion2 : blurAnimarion  } 
   ${props => props.index % 2 === 0 ? "3s" : "1.5s" } infinite;
   ${props => {

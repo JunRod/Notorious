@@ -49,6 +49,8 @@ export const Cursor = styled.div`
   width: 130rem;
   display: flex;
   justify-content: center;
+  z-index: 40;
+  
 
 `
 
