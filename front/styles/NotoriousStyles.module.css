@@ -1,0 +1,32 @@
+.container {
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative !important;
+    height: 720px;
+}
+
+.form {
+    width: 20% !important;
+    position: relative !important;
+    align-self: flex-start;
+    padding-left: 10px !important;
+    padding-top: 0px !important;
+
+}
+
+.form div {
+    width: 100%;
+    font-size: 14px !important;
+}
+
+.form div {
+}
+
+
+.input {
+
+}
+

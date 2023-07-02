@@ -1,7 +1,15 @@
+"use client"
+
+import {useContext} from "react";
+import {ContextNotorious} from "@app/ProviderPage"
 
 function Page() {
+    const {word} = useContext(ContextNotorious)
+
     return (
-        <div>PlayContainer</div>
+        <div style={{color: "white"}}>
+            {word}
+        </div>
     );
 }
 
