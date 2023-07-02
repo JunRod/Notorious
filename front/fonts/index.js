@@ -2,7 +2,7 @@ import localFont from "next/font/local"
 import { Orbitron } from "next/font/google";
 
 export const orbitron = Orbitron({
-  weight: "500",
+  weight: ["400", "500", "600"],
   style: "normal",
   subsets: ["latin"],
   display: "swap"

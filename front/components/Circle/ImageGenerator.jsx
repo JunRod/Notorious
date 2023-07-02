@@ -3,39 +3,26 @@ import styled, {keyframes, css}from "styled-components";
 
 const blurAnimarion = keyframes`
   0% {
-    filter: blur(23px);
+    filter: blur(15px);
   }
   50% {
-    filter: blur(30px);
+    filter: blur(20px);
   }
   100% {
-    filter: blur(23px);
+    filter: blur(15px);
   }
 `
 
-const blurAnimarion2 = keyframes`
-  0% {
-    filter: blur(15px);
-  }
-  50% {
-    filter: blur(25px);
-  }
-  100% {
-    filter: blur(15px);
-  }
-`
 
 const ImageStyled = styled(Image)`
   position: absolute;
   mix-blend-mode: screen;
-  animation: ${""}
-  ${props => props.index % 2 === 0 ? blurAnimarion2 : blurAnimarion  } 
-  ${props => props.index % 2 === 0 ? "3s" : "1.5s" } infinite;
+  animation: ${blurAnimarion} ${props => props.index % 2 === 0 ? "2s" : "1s" } infinite;
   ${props => {
       switch (props.index) {
         case 1:
             return css`
-              left: 120px;
+              left: 140px;
               top: -170px;
             `
         case 2:

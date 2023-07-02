@@ -7,7 +7,11 @@ const Button = () => {
   return (
     <ContainerButton>
         <Effect/>
-        <Text className={orbitron.className}>
+        <Text
+            href={"play"}
+            className={orbitron.className}
+            style={{fontWeight: 600}}
+        >
           Prueba Notorious
         </Text>
     </ContainerButton>

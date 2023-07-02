@@ -2,9 +2,9 @@ import {Pixel} from "@styles/PixelGeneratorStyle";
 
 function Pixels() {
     return (
-            Array(10).fill().map((_, index) => {
+            Array(11).fill().map((_, index) => {
                 return (
-                    <Pixel/>
+                    <Pixel index={index}/>
                 )
             })
     );

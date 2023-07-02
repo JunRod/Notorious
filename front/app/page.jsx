@@ -1,17 +1,18 @@
-import Button from "@components/Button/Button";
-import Circle from "@components/Circle/Circle";
+import LandingStyles from "@styles/LandingStyles.module.css";
 import Title from "@components/Title/Title";
+import Button from "@components/Button/Button";
 import Avatar from "@components/Avatar/Avatar";
+import Circle from "@components/Circle/Circle";
 
-const Landing = () => {
+const Page = () => {
   return (
-      <>
-        {/*<Title />*/}
-        {/*<Button />*/}
-        <Avatar/>
-        <Circle />
-      </>
+      <div className={LandingStyles.container}>
+          <Title/>
+          <Button/>
+          <Avatar/>
+          <Circle/>
+      </div>
   );
 };
 
-export default Landing;
+export default Page;

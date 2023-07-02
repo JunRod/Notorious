@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
-  top: 30px;
+  top: 215px;
   background: radial-gradient(farthest-corner at 1000px -200px,
   #fff 20%,
   transparent 60%);

@@ -45,20 +45,21 @@ export const Container = styled.div`
 
 export const Cursor = styled.div`
   position: relative;
-  height: 16rem;
+  height: 13rem;
   width: 130rem;
   display: flex;
   justify-content: center;
-  z-index: 40;
-  
-
+  align-items: center;
+  top: 500px;
+  z-index: 220;
+  cursor: crosshair;
 `
 
 export const Line = styled.div`
   position: absolute;
   height: 5rem;
   width: 118rem;
-  top: 12.4rem;
+  top: 11rem;
   filter: ${props => props.blur ? "blur(8px)" : "none"};
   mix-blend-mode: ${props => props.blur ? "hard-light" : "none"};;
 `

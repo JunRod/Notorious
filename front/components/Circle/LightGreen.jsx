@@ -6,6 +6,7 @@ const ContainerStars = styled.div`
     transform: scaleX(-1);
     left: 30px;
     position: relative;
+    top: -15px;
   `}; 
 `
 export const AllStars = ({FlipHorizontal}) => {

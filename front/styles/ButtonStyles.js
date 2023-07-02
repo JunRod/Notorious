@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import Link from "next/link";
 
-export const Text = styled.div`
+export const Text = styled(Link)`
   background: radial-gradient(farthest-side at 118px 7px, #FFF8FF, #FF5AFF 70% );
   font-size: 2.3rem;
   letter-spacing: .1rem;
@@ -20,7 +21,9 @@ export const Effect = styled.div`
 `
 
 export const ContainerButton = styled.div`
-  z-index: 30;
+  cursor: pointer;
+  top: 530px;
+  z-index: 270;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,9 +40,9 @@ export const ContainerButton = styled.div`
 
   &::after {
     content: "";
-    height: 80%;
+    height: 60%;
     top: 0;
-    width: 100%;
+    width: 95%;
     position: absolute;
     background: radial-gradient(farthest-side at 118px 0px, #FFF8FF 20%, #FF5AFF 70%);
     z-index: -10;

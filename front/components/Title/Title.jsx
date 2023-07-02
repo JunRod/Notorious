@@ -20,7 +20,7 @@ const Title = () => {
 
   const coords = {
     x: x + 620,
-    y,
+    y: y + 40,
   };
 
   return (

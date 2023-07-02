@@ -1,15 +1,16 @@
-import { Body } from "@components/Body"
 import "@styles/globals.css"
 import StyledComponentsRegistry from "@utils/registry"
+import Documentation from "@components/documentation";
 
 const layout = ({children}) => {
   return (
     <html lang="en">
-      <Body>
+      <body>
         <StyledComponentsRegistry>
           {children}
+            <Documentation/>
         </StyledComponentsRegistry>
-      </Body>
+      </body>
     </html>
   )
 }
