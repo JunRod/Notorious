@@ -4,7 +4,7 @@ import {createContext, useEffect, useState} from "react";
 export const ContextNotorious = createContext(null)
 
 function ProviderPage({children}) {
-    const [word, setWord] = useState("hello")
+    const [word, setWord] = useState("hola")
 
     const updateWord = (wordNew) => {
         setWord(wordNew)

@@ -3,7 +3,7 @@
 import { orbitron } from "@fonts";
 import {  ContainerButton, Effect, Text } from "@styles/ButtonStyles";
 
-const Button = () => {
+const Button = ({children}) => {
   return (
     <ContainerButton>
         <Effect/>
@@ -12,7 +12,7 @@ const Button = () => {
             className={orbitron.className}
             style={{fontWeight: 600}}
         >
-          Prueba Notorious
+            {children}
         </Text>
     </ContainerButton>
   )

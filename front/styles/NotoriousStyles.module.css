@@ -5,14 +5,14 @@
     justify-content: space-between;
     align-items: center;
     position: relative !important;
-    height: 720px;
+    height: 640px;
 }
 
 .form {
     width: 20% !important;
     position: relative !important;
     align-self: flex-start;
-    padding-left: 10px !important;
+    padding-left: 20px !important;
     padding-top: 0px !important;
 
 }
@@ -22,7 +22,15 @@
     font-size: 14px !important;
 }
 
-.form div {
+.title {
+    width: 100%;
+    background-color: black;
+    position: relative;
+    display: block;
+    padding: 20px 20px;
+    color: white;
+    font-size: 22px;
+    letter-spacing: 2px;
 }
 
 

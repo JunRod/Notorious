@@ -8,7 +8,7 @@ const Page = () => {
   return (
       <div className={LandingStyles.container}>
           <Title/>
-          <Button/>
+          <Button>Prueba Notorious</Button>
           <Avatar/>
           <Circle/>
       </div>

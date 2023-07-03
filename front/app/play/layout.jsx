@@ -11,16 +11,7 @@ function Page({children}) {
 
     const {updateWord} = useContext(ContextNotorious)
 
-    const fetchWordsInEnglish = () => {
-        fetch("http://localhost:8080/words?message=hello&bandera=true")
-            .then(response => response.text())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-    }
+
 
     const handleActive = (index, word) => {
         setActiveIndex(index === activeIndex ? 0 : index);
@@ -28,7 +19,12 @@ function Page({children}) {
     };
 
     return (
+        <>
+        <div className={`${NotoriousStyles.title} ${orbitron.className}`}>
+            Notorious
+        </div>
             <div className={NotoriousStyles.container}>
+
                 <div className={`${DocumentationStyle.container} ${NotoriousStyles.form}`}>
                     {
                         Object.keys(words).map((key, index) => {
@@ -46,6 +42,7 @@ function Page({children}) {
                 </div>
                 {children}
             </div>
+        </>
     );
 }
 

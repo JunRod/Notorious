@@ -1,0 +1,48 @@
+
+.container {
+    height: 100%;
+    width: 100%;
+    padding: 50px 240px 120px 240px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.WordsESP_ENGContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wordEspanish {
+    color: #f7bb62;
+    padding: 10px;
+    min-width: 200px;
+    background-color: #3e2c1f;
+    position: relative;
+    box-shadow: 0 2px 0px #9f6229;
+}
+
+.similarWord {
+    align-self: end;
+    display: flex;
+    justify-content: space-between;
+}
+
+.IdeaButton {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-size: 20px;
+    align-self: end;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+}

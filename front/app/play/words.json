@@ -1,17 +1,17 @@
 {
   "Ser" : {
-
+    "english": "To be"
   },
   "Estar" : {
-
+    "english": "To be (temporality)"
   },
   "Tener" : {
-
+    "english": "To have"
   },
   "Haber" : {
-
+    "english": "To have (auxiliary verb)"
   },
   "Hay" : {
-
+    "english": "There is / There are"
   }
 }
