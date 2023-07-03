@@ -11,6 +11,7 @@ const Button = ({children}) => {
             href={"play"}
             className={orbitron.className}
             style={{fontWeight: 600}}
+            prefetch
         >
             {children}
         </Text>

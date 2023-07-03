@@ -16,8 +16,9 @@ function Page() {
     const [wordsSimilar, setWordSimilar] = useState("")
     const [cutWord, setCutWord] = useState()
     const [indexWord, setIndexWord] = useState(0)
-    const [wordUse, setWordUse] = useState()
-    const [idea, setIdea] = useState("")
+    const [wordUse, setWordUse] = useState("")
+    const [idea, setIdea] = useState(null)
+    const [buttonText, setButtonText] = useState("Generar palabra similar")
 
     const generatorIdea = () => {
         if (word && wordUse) {
@@ -25,7 +26,16 @@ function Page() {
                 fetch(`${BASE_URL}/idea?wordOne=${word}&wordTwo=${wordUse}`)
                     .then(response => response.text())
                     .then(data => {
-                        setIdea(data);
+                        const regex = new RegExp(`\\b(${word}|${wordUse})\\b`, "gi");
+                        const splittedData = data.split(regex);
+                        const resaltado = splittedData.map((segment, index) => {
+                            if (regex.test(segment)) {
+                                return <span key={index} style={{ color: "red" }}>{segment}</span>;
+                            } else {
+                                return segment;
+                            }
+                        });
+                        setIdea(resaltado);
                     })
             }
             fetchIdea();
@@ -37,10 +47,10 @@ function Page() {
         setIndexWord((prev) => (prev === cutWord?.length - 1 ? 0 : prev + 1));
     };
 
-    const fetchAll=() => {
-        if (wordEnglish.length === 0) return
-        if (wordUse?.length === 0) fetchWordSimilar()
-            generatorIdea()
+    const fetchAll = () => {
+        if (wordEnglish.length === 0 ) return
+        if (wordUse?.length === 0) return fetchWordSimilar()
+        generatorIdea()
     }
 
     const fetchWordSimilar = () => {
@@ -50,6 +60,11 @@ function Page() {
                 setWordSimilar(data);
             })
     }
+
+    useEffect(() => {
+        if(wordUse?.length === 0) return
+        setButtonText("Generar Idea y Memorizar")
+    }, [wordUse])
 
     useEffect(() => {
         const words = wordsSimilar
@@ -73,6 +88,10 @@ function Page() {
     //Get word in english
     useEffect(() => {
         if (word && words[word]) {
+            setWordUse("")
+            setCutWord("")
+            setIdea(null)
+            setWordSimilar("")
             Object.values(words[word]).map(word => setWordEnglish(word));
         }
     }, [word])
@@ -87,7 +106,10 @@ function Page() {
                     {wordEnglish}
                 </div>
             </div>
-                <div className={`${NotoriousViewStyles.wordEspanish} ${NotoriousViewStyles.similarWord}`}>
+                <div className={`
+                ${NotoriousViewStyles.wordEspanish} 
+                ${NotoriousViewStyles.similarWord}
+                `}>
                     <div>
                         {wordUse}
                     </div>
@@ -101,12 +123,13 @@ function Page() {
                     />
                 </div>
                 <div className={NotoriousViewStyles.IdeaButton}>
-                    <div className={`${NotoriousViewStyles.wordEspanish}`}>
+                    <div
+                        className={`${NotoriousViewStyles.wordEspanish} ${NotoriousViewStyles.stylesIdea}`}
+                    >
                         {idea}
                     </div>
-                    <button onClick={fetchAll} className={`${NotoriousViewStyles.button} ${orbitron.className}`}>Memorizar</button>
+                    <button onClick={fetchAll} className={`${NotoriousViewStyles.button} ${orbitron.className}`}>{buttonText}</button>
                 </div>
-
         </div>
     );
 }

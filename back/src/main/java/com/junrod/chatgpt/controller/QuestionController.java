@@ -30,7 +30,7 @@ public class QuestionController {
     @GetMapping("/idea")
     public ResponseEntity<String> idea(@RequestParam String wordOne, @RequestParam String wordTwo) {
         String responseMessage = chatgptService.multiChat(Arrays.asList(
-                new MultiChatMessage("user", "Estoy memorizando. Dame Idea inverosimil muy corta que incluya las palabras " + wordOne + " y " + wordTwo + ". Que mis 5 sentidos estén involucrados.")
+                new MultiChatMessage("user", "Estoy memorizando. Dame Idea inverosimil de 35 palabras que incluya las palabras " + wordOne + " y " + wordTwo + ". Incluye las palabras tal y como se escriben sin modificarlas. Y que en la idea mis 5 sentidos estén involucrados.")
         ));
         return ResponseEntity.ok(responseMessage);
     }

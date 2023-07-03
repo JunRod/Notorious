@@ -59,7 +59,7 @@ export const Line = styled.div`
   position: absolute;
   height: 5rem;
   width: 118rem;
-  top: 11rem;
+  top: 9.8rem;
   filter: ${props => props.blur ? "blur(8px)" : "none"};
   mix-blend-mode: ${props => props.blur ? "hard-light" : "none"};;
 `

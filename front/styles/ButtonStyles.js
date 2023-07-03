@@ -22,6 +22,7 @@ export const Effect = styled.div`
 
 export const ContainerButton = styled.div`
   cursor: pointer;
+  top: 530px;
   z-index: 270;
   display: flex;
   justify-content: center;

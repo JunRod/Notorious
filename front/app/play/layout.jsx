@@ -5,12 +5,12 @@ import {orbitron} from "@fonts";
 import DocumentationStyle from "@styles/DocumentationStyles.module.css";
 import words from "./words.json";
 import {ContextNotorious} from "@app/ProviderPage";
+import Link from "next/link";
 
 function Page({children}) {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const {updateWord} = useContext(ContextNotorious)
-
 
 
     const handleActive = (index, word) => {
@@ -20,11 +20,12 @@ function Page({children}) {
 
     return (
         <>
-        <div className={`${NotoriousStyles.title} ${orbitron.className}`}>
-            Notorious
-        </div>
+            <div className={`${NotoriousStyles.title} ${orbitron.className}`}>
+                <Link href={"/"} style={{color: "white"}} prefetch>
+                    Notorious
+                </Link>
+            </div>
             <div className={NotoriousStyles.container}>
-
                 <div className={`${DocumentationStyle.container} ${NotoriousStyles.form}`}>
                     {
                         Object.keys(words).map((key, index) => {
