@@ -1,7 +1,7 @@
 # Notorious - Aprende inglés con el mejor sistema de aprendizaje
 ## Basado en el libro del campeón mundial de memorización
 
-[Probar Notorious][https://notorious-two.vercel.app/)
+[Probar Notorious](https://notorious-two.vercel.app/)
 
 Notorious es una inteligencia artificial entrenado para ayudarte a aprender cualquier idioma extranjero en 7 días con el sistema de aprendizaje más efectivo.
 El sistema propuesto de aprendizaje se basa en el uso de asociaciones inverosímiles para memorizar vocabulario y datos puros, aprovechando los mecanismos automáticos e inconscientes de la mente.
