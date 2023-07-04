@@ -6,6 +6,7 @@ import DocumentationStyle from "@styles/DocumentationStyles.module.css";
 import words from "./words.json";
 import {ContextNotorious} from "@app/ProviderPage";
 import Link from "next/link";
+import {Toaster} from "sonner";
 
 function Page({children}) {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -20,6 +21,7 @@ function Page({children}) {
 
     return (
         <>
+            <Toaster/>
             <div className={`${NotoriousStyles.title} ${orbitron.className}`}>
                 <Link href={"/"} style={{color: "white"}} prefetch>
                     Notorious
@@ -47,12 +49,5 @@ function Page({children}) {
     );
 }
 
-
-/*<div
-    className={`${DocumentationStyle.content} ${
-        index === 0 ? DocumentationStyle.on : index === activeIndex ? DocumentationStyle.on : DocumentationStyle.off}`}
->
-    {words[key]}
-</div>*/
 
 export default Page;

@@ -20,18 +20,30 @@
     background-color: #3e2c1f;
     position: relative;
     box-shadow: 0 2px 0px #9f6229;
+    min-width: 200px;
+    min-height: 50px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
 }
 
 
 .stylesIdea {
-    width: 100%;
+    width: 100% !important;
+    overflow-y: auto;
+    max-height: 150px;
 }
 
 .similarWord {
     align-self: end;
     display: flex;
     justify-content: space-between;
-    min-width: 42% !important;
+    text-align: center;
+}
+
+.similarWordCenter {
+    width: 100%;
+    align-self: center;
 }
 
 .IdeaButton {
@@ -50,4 +62,8 @@
     cursor: pointer;
     position: relative;
     align-self: center;
+}
+
+.disabled {
+    color: #5d5d5d;
 }

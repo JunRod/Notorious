@@ -6,12 +6,14 @@ import NotoriousViewStyles from "@styles/NotoriousViewStyles.module.css"
 import {orbitron} from "@fonts";
 import words from "@app/play/words.json";
 import Image from "next/image"
+import Loader from "@components/Loader";
+import ButtonLimit from "@components/ButtonLimit";
 
-const BASE_URL = "http://localhost:8080"
+const BASE_URL = "https://c276-190-237-47-121.ngrok-free.app"
 
 function Page() {
 
-    const {word} = useContext(ContextNotorious)
+    const {word, disabled, updateDisabled} = useContext(ContextNotorious)
     const [wordEnglish, setWordEnglish] = useState("");
     const [wordsSimilar, setWordSimilar] = useState("")
     const [cutWord, setCutWord] = useState()
@@ -19,23 +21,22 @@ function Page() {
     const [wordUse, setWordUse] = useState("")
     const [idea, setIdea] = useState(null)
     const [buttonText, setButtonText] = useState("Generar palabra similar")
+    const [isLoading, setIsLoading] = useState(null)
 
     const generatorIdea = () => {
         if (word && wordUse) {
             const fetchIdea = () => {
-                fetch(`${BASE_URL}/idea?wordOne=${word}&wordTwo=${wordUse}`)
+                setIsLoading(true)
+                fetch(`${BASE_URL}/idea?wordOne=${word}&wordTwo=${wordUse}`, { mode: 'no-cors' })
                     .then(response => response.text())
                     .then(data => {
-                        const regex = new RegExp(`\\b(${word}|${wordUse})\\b`, "gi");
-                        const splittedData = data.split(regex);
-                        const resaltado = splittedData.map((segment, index) => {
-                            if (regex.test(segment)) {
-                                return <span key={index} style={{ color: "red" }}>{segment}</span>;
-                            } else {
-                                return segment;
-                            }
+                        const DataMinusculas = data.toLowerCase()
+                        const regex = new RegExp(`\\b${word}\\w*\\b|\\b${wordUse}\\w*\\b`, "gi");
+                        const resaltado = DataMinusculas.replace(regex, (match) => {
+                            return `<span style="color: red">${match}</span>`;
                         });
                         setIdea(resaltado);
+                        setIsLoading(false)
                     })
             }
             fetchIdea();
@@ -54,16 +55,21 @@ function Page() {
     }
 
     const fetchWordSimilar = () => {
-        fetch(`${BASE_URL}/words?message=${wordEnglish}`)
+        setIsLoading(true)
+        fetch(`${BASE_URL}/words?message=${wordEnglish}`, { mode: 'no-cors' })
             .then(response => response.text())
             .then(data => {
                 setWordSimilar(data);
+                setIsLoading(false)
             })
     }
 
     useEffect(() => {
-        if(wordUse?.length === 0) return
-        setButtonText("Generar Idea y Memorizar")
+        if(wordUse?.length === 0) {
+            setButtonText("Generar palabra similar")
+        } else {
+            setButtonText("Generar Idea a Memorizar")
+        }
     }, [wordUse])
 
     useEffect(() => {
@@ -73,7 +79,8 @@ function Page() {
             .filter((word) => word !== "")
             .join(",")
             .split(",")
-            .map((word) => word.trim());
+            .map((word) => word.trim().replace(/\/.*$/, ""))
+            .filter(word => !word.includes(" "));
         setCutWord(words)
     }, [wordsSimilar])
 
@@ -82,7 +89,6 @@ function Page() {
             setWordUse(cutWord[indexWord]);
         }
     }, [cutWord, indexWord]);
-
 
 
     //Get word in english
@@ -110,8 +116,12 @@ function Page() {
                 ${NotoriousViewStyles.wordEspanish} 
                 ${NotoriousViewStyles.similarWord}
                 `}>
-                    <div>
-                        {wordUse}
+                    <div className={NotoriousViewStyles.similarWordCenter}>
+                        {
+                            isLoading && wordUse?.length === 0
+                                ? (<Loader/>)
+                                : (wordUse)
+                        }
                     </div>
                     <Image
                         src={"/images/next.svg"}
@@ -126,9 +136,14 @@ function Page() {
                     <div
                         className={`${NotoriousViewStyles.wordEspanish} ${NotoriousViewStyles.stylesIdea}`}
                     >
-                        {idea}
+                        {
+                            isLoading && wordUse?.length > 0
+                                ? (<Loader/>)
+                                : (<div dangerouslySetInnerHTML={{ __html: idea }}></div>)
+                        }
+
                     </div>
-                    <button onClick={fetchAll} className={`${NotoriousViewStyles.button} ${orbitron.className}`}>{buttonText}</button>
+                    <ButtonLimit fetchAll={fetchAll}>{buttonText}</ButtonLimit>
                 </div>
         </div>
     );
