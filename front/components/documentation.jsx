@@ -9,7 +9,6 @@ function Documentation() {
 
     const [activeIndex, setActiveIndex] = useState(0);
 
-
     const handleActive = (index) => {
         setActiveIndex(index === activeIndex ? 0 : index);
     };

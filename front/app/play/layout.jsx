@@ -11,12 +11,11 @@ import {Toaster} from "sonner";
 function Page({children}) {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const {updateWord} = useContext(ContextNotorious)
-
+    /*const {updateWord} = useContext(ContextNotorious)*/
 
     const handleActive = (index, word) => {
         setActiveIndex(index === activeIndex ? 0 : index);
-        updateWord(word)
+        /*updateWord(word)*/
     };
 
     return (

@@ -1,5 +1,5 @@
 import styled, {keyframes, css} from "styled-components"
-import ImageGenerator from "@components/Circle/ImageGenerator";
+import ImageGenerator from "@components/circle/ImageGenerator";
 
 const ContainerStars = styled.div`
   ${props => props.FlipHorizontal && css`

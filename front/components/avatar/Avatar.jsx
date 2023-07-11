@@ -9,8 +9,8 @@ import {
     ShaderBlack,
     ShadesColors
 } from "@styles/ContainerAvatarStyles";
-import Pixels from "@components/Avatar/Pixels";
-import ShadersGenerator from "@components/Avatar/ShadersGenerator";
+import Pixels from "@components/avatar/Pixels";
+import ShadersGenerator from "@components/avatar/ShadersGenerator";
 
 function Avatar() {
     return (
