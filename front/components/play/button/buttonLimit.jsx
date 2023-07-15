@@ -10,7 +10,6 @@ import {getIdea, getImage, getWordsSimilar} from "@api/api";
 import {
     setB64_json,
     setButtonText,
-    setCutWord,
     setIdea,
     setIsDisabled,
     setIsLoading,
@@ -39,8 +38,8 @@ function ButtonLimit() {
             const dataFormatter = IdeaFormatter(data?.content, word, wordUse)
             dispatch(setIdea(dataFormatter))
 
-            const resp = await getImage(data?.content)
-            dispatch(setB64_json(resp.b64_json))
+            /*const resp = await getImage(data?.content)
+            dispatch(setB64_json(resp.b64_json))*/
 
         }
         dispatch(setIsLoading(false))
