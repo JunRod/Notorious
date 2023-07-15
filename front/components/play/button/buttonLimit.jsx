@@ -30,6 +30,7 @@ function ButtonLimit() {
 
         dispatch(setIsLoading(true))
 
+
         if (wordUse?.length === 0) {
             const data = await getWordsSimilar(wordEnglish)
             dispatch(setWordsSimilar(data.content))
@@ -48,6 +49,7 @@ function ButtonLimit() {
     function onClick () {
         setLimitNumber(prev => prev + 1)
 
+        //En el segundo click ya tiene que ser disabled, no esperar que se de el tercer click
         if(limitNumber < 2) {
             fetchAll()
             return
