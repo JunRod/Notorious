@@ -1,15 +1,27 @@
-import NotoriousViewStyles from "@styles/NotoriousViewStyles.module.css"
+import style from "@styles/NotoriousViewStyles.module.css"
 import {orbitron} from "@fonts";
-import Button from "@components/play/button/button";
-import Containers from "@components/play/containers";
+import ButtonLimit from "@components/play/button/buttonLimit";
+import {OneSection, ThreeSection, TwoSection} from "@components/play/sections/sections";
+import Image from "@components/play/image";
 
 function Page() {
 
     return (
-        <div className={`${NotoriousViewStyles.container} ${orbitron.className}`}>
-            <Containers/>
-            <div className={NotoriousViewStyles.IdeaButton}>
-                <Button/>
+        <div className={`${style.container} ${orbitron.className}`}>
+            <div className={style.WordsESP_ENGContainer}>
+                <OneSection/>
+            </div>
+            <div className={`${style.containerTwo}`}>
+                <Image/>
+                <div className={`${style.wordEspanish} ${style.similarWord}`}>
+                    <TwoSection/>
+                </div>
+            </div>
+            <div className={style.IdeaButton}>
+                <div className={`${style.wordEspanish} ${style.stylesIdea}`}>
+                    <ThreeSection/>
+                </div>
+                <ButtonLimit/>
             </div>
         </div>
     );

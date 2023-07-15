@@ -1,34 +1,18 @@
-const BASE_URL = "https://c276-190-237-47-121.ngrok-free.app"
+//Lear a un .env? De tal manera que importe solo la variable
+const BASE_URL = "http://167.99.155.175:8080"
 
-function getIdea() {
-    setIsLoading(true)
-
-    fetch(`${BASE_URL}/idea?wordOne=${word}&wordTwo=${wordUse}`)
-        .then(response => response.text())
-        .then(data => {
-            const DataMinusculas = data.toLowerCase()
-            const regex = new RegExp(`\\b${word}\\w*\\b|\\b${wordUse}\\w*\\b`, "gi");
-            const resaltado = DataMinusculas.replace(regex, (match) => {
-                return `<span style="color: red">${match}</span>`;
-            });
-            setIdea(resaltado);
-            setIsLoading(false)
-        })
+export async function getWordsSimilar(wordEnglish) {
+    const response = await fetch(`${BASE_URL}/words?word=${wordEnglish}`, {next: {revalidate: 3600}})
+    return await response.json()
 }
 
-function getWordsSimilar () {
-    setIsLoading(true)
-
-    fetch(`${BASE_URL}/words?message=${wordEnglish}`)
-        .then(response => response.text())
-        .then(data => {
-            setWordSimilar(data);
-            setIsLoading(false)
-        })
+export async function getIdea(word, wordUse) {
+    const res = await fetch(`${BASE_URL}/idea?wordOne=${word}&wordTwo=${wordUse}`, {next: {revalidate: 3600}})
+    return await res.json()
 }
 
-export function fetchAll () {
-    if (wordEnglish.length === 0 ) return
-    if (wordUse?.length === 0) return getWordSimilar()
-    getIdea()
+export async function getImage(history) {
+    const response = await fetch(`${BASE_URL}/image?history=${history}`, {next: {revalidate: 3600}})
+    return await response.json()
+
 }

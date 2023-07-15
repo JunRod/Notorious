@@ -6,6 +6,7 @@ import com.theokanning.openai.completion.chat.ChatMessageRole;
 import com.theokanning.openai.image.CreateImageRequest;
 import com.theokanning.openai.service.OpenAiService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@RestController
+@CrossOrigin(origins = {"http://localhost:3000", "https://notorious-learn.vercel.app"})
+@RestController("/")
 public class NotoriousController {
     Object response;
     OpenAiService service;
@@ -27,7 +29,12 @@ public class NotoriousController {
         messages = new ArrayList<>();
     }
 
-    @GetMapping("/words")
+    @GetMapping("hello")
+    public String hello() {
+        return "Hola!";
+    }
+
+    @GetMapping("words")
     public Object GenerateWords (String word) {
 
         /*Streaming chat completion...*/
@@ -36,16 +43,11 @@ public class NotoriousController {
         return getObject();
     }
 
-    @GetMapping("/idea")
+    @GetMapping("idea")
     public Object GenerateWords (String wordOne, String wordTwo) {
 
         /*Streaming chat completion...*/
-        systemMessage = new ChatMessage(ChatMessageRole.USER.value(), "Estoy memorizando. Dame una sola Idea " +
-                "inverosimil corta de 30 palabras que incluya las palabras" + wordOne + " y " + wordTwo + " Usa " +
-                "la mismas cantidad de letras de cada palabra y las mismas letras. ejemplo: Te doy las palabras Llenar " +
-                "y hilo, la idea seria asi: En el jardín encantado, hilos de luz tejían melodías brillantes que " +
-                "llenaban el aire de magia. El aroma de las flores danzaba en la brisa, mientras el sabor del néctar embriagaba" +
-                " los sentidos. Suaves caricias de hojas acariciaban la piel, y los susurros del viento susurraban secretos inaudibles. Todo un festín sensorial para el alma. Que mis 5 sentidos estén involucrados en la idea inverosimil.");
+        systemMessage = new ChatMessage(ChatMessageRole.USER.value(), "I am memorizing Give me a single short implausible idea in Spanish with a maximum of 30 words that includes the words: " + wordOne + " and " + wordTwo + ". Let my 5 senses be involved in the implausible idea. that your answer is in spanish");
         return getObject();
     }
 
@@ -57,7 +59,6 @@ public class NotoriousController {
                 .model("gpt-3.5-turbo")
                 .messages(messages)
                 .n(1)
-                .maxTokens(50)
                 .logitBias(new HashMap<>())
                 .build();
 
@@ -67,17 +68,18 @@ public class NotoriousController {
         return response;
     }
 
-    @GetMapping("/image")
+    @GetMapping("image")
     public Object ImageGenerate(String history) {
 
         //Creating Image
         CreateImageRequest request = CreateImageRequest.builder()
                 .prompt(history)
                 .size("256x256")
+                .responseFormat("b64_json")
                 .build();
 
         //Image is located at:
-        response = service.createImage(request).getData().get(0).getUrl();
+        response = service.createImage(request).getData().get(0);
         service.shutdownExecutor();
 
         return response;

@@ -1,26 +1,15 @@
-"use client"
 import NotoriousStyles from "@styles/NotoriousStyles.module.css"
-import {useContext, useState} from "react";
 import {orbitron} from "@fonts";
 import DocumentationStyle from "@styles/DocumentationStyles.module.css";
-import words from "./words.json";
-import {ContextNotorious} from "@app/ProviderPage";
 import Link from "next/link";
 import {Toaster} from "sonner";
+import List from "@components/play/list";
 
-function Page({children}) {
-    const [activeIndex, setActiveIndex] = useState(0);
-
-    /*const {updateWord} = useContext(ContextNotorious)*/
-
-    const handleActive = (index, word) => {
-        setActiveIndex(index === activeIndex ? 0 : index);
-        /*updateWord(word)*/
-    };
+function Layout({children}) {
 
     return (
         <>
-            <Toaster/>
+            <Toaster position="bottom-right"/>
             <div className={`${NotoriousStyles.title} ${orbitron.className}`}>
                 <Link href={"/"} style={{color: "white"}} prefetch>
                     Notorious
@@ -28,19 +17,7 @@ function Page({children}) {
             </div>
             <div className={NotoriousStyles.container}>
                 <div className={`${DocumentationStyle.container} ${NotoriousStyles.form}`}>
-                    {
-                        Object.keys(words).map((key, index) => {
-                            return (
-                                <div
-                                    className={`${orbitron.className} ${DocumentationStyle.seccion} ${index === activeIndex && DocumentationStyle.onSeccion}`}
-
-                                    onClick={() => handleActive(index, key)}
-                                >
-                                    {key}
-                                </div>
-                            );
-                        })
-                    }
+                    <List/>
                 </div>
                 {children}
             </div>
@@ -49,4 +26,4 @@ function Page({children}) {
 }
 
 
-export default Page;
+export default Layout;

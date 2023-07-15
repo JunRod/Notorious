@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    word: [],
+    word: "",
     wordEnglish: "",
     wordsSimilar: "",
     cutWord: "",
@@ -10,13 +10,17 @@ const initialState = {
     idea: null,
     isLoading: null,
     isDisabled: true,
-    buttonText: "Generar palabra similar"
+    buttonText: "Generar palabra similar",
+    b64_json: ""
 }
 
 export const notoriousSlice = createSlice({
     name: "notorious",
     initialState,
     reducers: {
+        setWord: (state, {payload}) => {
+            state.word = payload
+        },
         setWordEnglish: (state, {payload}) => {
             state.wordEnglish = payload
         },
@@ -33,7 +37,7 @@ export const notoriousSlice = createSlice({
             state.wordUse = payload
         },
         setIdea: (state, {payload}) => {
-            state.cutWord = payload
+            state.idea = payload
         },
         setIsLoading: (state, {payload}) => {
             state.isLoading = payload
@@ -43,12 +47,16 @@ export const notoriousSlice = createSlice({
         },
         setButtonText: (state, {payload}) => {
             state.buttonText = payload
+        }
+        ,setB64_json: (state, {payload}) => {
+            state.b64_json = payload
         },
     }
 });
 
 // Action creators are generated for each case reducer function
 export const {
+    setWord,
     setWordEnglish,
     setWordsSimilar,
     setCutWord,
@@ -57,5 +65,6 @@ export const {
     setIdea,
     setIsLoading,
     setIsDisabled,
-    setButtonText
+    setButtonText,
+    setB64_json
 } = notoriousSlice.actions;

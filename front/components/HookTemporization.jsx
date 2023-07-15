@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-
 function HookTemporization(value) {
 
     const [counter, setCounter] = useState(0)
