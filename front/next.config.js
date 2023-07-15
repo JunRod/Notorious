@@ -6,19 +6,11 @@ const nextConfig = {
         contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
         minimumCacheTTL: 3600,
     },
-    async headers() {
-        return [
-            {
-                source: '/(.*)',
-                headers: [
-                    {
-                        key: 'Strict-Transport-Security',
-                        value: 'max-age=0; includeSubDomains; preload'
-                    }
-                ]
-            }
-        ]
-    }
+    http: {
+        server: {
+            http: true,
+        },
+    },
 }
 
 module.exports = nextConfig

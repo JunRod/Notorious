@@ -1,5 +1,5 @@
 //Lear a un .env? De tal manera que importe solo la variable
-const BASE_URL = "http://167.99.155.175:8080"
+const BASE_URL = "https://notoriousback.ddns.net"
 
 export async function getWordsSimilar(wordEnglish) {
     const response = await fetch(`${BASE_URL}/words?word=${wordEnglish}`, {next: {revalidate: 3600}})
