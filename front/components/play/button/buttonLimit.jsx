@@ -30,7 +30,6 @@ function ButtonLimit() {
 
         dispatch(setIsLoading(true))
 
-
         if (wordUse?.length === 0) {
             const data = await getWordsSimilar(wordEnglish)
             dispatch(setWordsSimilar(data.content))
