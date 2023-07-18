@@ -18,6 +18,7 @@ function Documentation() {
             {Object.keys(data).map((key, index) => {
                 return (
                     <div
+                        key={key}
                         className={` ${orbitron.className} ${DocumentationStyle.seccion} ${index === activeIndex && DocumentationStyle.onSeccion}`}
                         onClick={() => handleActive(index)}
                     >

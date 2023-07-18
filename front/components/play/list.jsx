@@ -21,6 +21,7 @@ function List() {
         <div
             className={`${orbitron.className} ${DocumentationStyle.seccion} ${index === activeIndex && DocumentationStyle.onSeccion}`}
             onClick={() => handleActive(index, key)}
+            key={key}
         >{key}</div>
     );
 }

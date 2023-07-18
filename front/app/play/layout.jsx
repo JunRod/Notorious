@@ -2,14 +2,12 @@ import NotoriousStyles from "@styles/NotoriousStyles.module.css"
 import {orbitron} from "@fonts";
 import DocumentationStyle from "@styles/DocumentationStyles.module.css";
 import Link from "next/link";
-import {Toaster} from "sonner";
 import List from "@components/play/list";
 
 function Layout({children}) {
 
     return (
         <>
-            <Toaster position="bottom-right"/>
             <div className={`${NotoriousStyles.title} ${orbitron.className}`}>
                 <Link href={"/"} style={{color: "white"}} prefetch>
                     Notorious
