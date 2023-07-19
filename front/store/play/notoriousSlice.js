@@ -12,7 +12,9 @@ const initialState = {
     isDisabled: true,
     buttonText: "Generar palabra similar",
     b64_json: "",
-    flag: false
+    flagWordSimilar: false,
+    flagIdea: false,
+    flagImage: false
 }
 
 export const notoriousSlice = createSlice({
@@ -52,8 +54,14 @@ export const notoriousSlice = createSlice({
         ,setB64_json: (state, {payload}) => {
             state.b64_json = payload
         }
-        ,setFlag: (state, {payload}) => {
-            state.flag = payload
+        ,setFlagWordsSimilar: (state, {payload}) => {
+            state.flagWordSimilar = payload
+        }
+        ,setFlagIdea: (state, {payload}) => {
+            state.flagIdea = payload
+        }
+        ,setFlagImage: (state, {payload}) => {
+            state.flagImage = payload
         }
     }
 });
@@ -71,5 +79,7 @@ export const {
     setIsDisabled,
     setButtonText,
     setB64_json,
-    setFlag
+    setFlagWordsSimilar,
+    setFlagIdea,
+    setFlagImage
 } = notoriousSlice.actions;

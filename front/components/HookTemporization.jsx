@@ -9,16 +9,14 @@ function HookTemporization(value) {
     }
 
     useEffect(() => {
-        if(state) {
-            setCounter(60)
-        }
+        if(state) setCounter(60)
     }, [state])
 
     useEffect(() => {
         if(counter !== 0) {
             setTimeout(() => {
-                setCounter(prev => prev - 1)
-            },1000)
+                setCounter(prev => prev - 5)
+            },5000)
             return
         }
         setState(false)

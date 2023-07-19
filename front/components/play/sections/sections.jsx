@@ -4,31 +4,26 @@ import {useEffect} from "react";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    setB64_json,
-    setCutWord,
+    setCutWord, setFlagIdea, setFlagWordsSimilar,
     setIdea,
-    setIndexWord, setWord,
+    setIndexWord,  setWord,
     setWordEnglish,
     setWordsSimilar,
     setWordUse
 } from "@store/play/notoriousSlice";
-import styles from "@styles/NotoriousViewStyles.module.css";
+import styles from "@styles/NotoriousView.module.css";
 import Loader from "@components/Loader";
 import words from "@app/play/words.json";
-import {WordsSimilarFormatter} from "@components/play/helpers";
+import {IdeaFormatter, WordsSimilarFormatter} from "@components/play/helpers";
+import {useGetIdea, useGetWordsSimilar} from "@api/api";
 
 export function OneSection() {
-    const {word, wordEnglish} = useSelector(state => state.notorious)
     const dispatch = useDispatch()
+    const {word, wordEnglish} = useSelector(state => state.notorious)
 
     useEffect(() => {
-        if (word) {
-            dispatch(setIndexWord(0))
-            dispatch(setWordUse(""))
-            dispatch(setCutWord(""))
-            dispatch(setIdea(null))
-            dispatch(setWordsSimilar(""))
-            dispatch(setB64_json(""))
+        if (word.length > 0) {
+            dispatch(setWord(word))
             Object.values(words[word]).map(word => dispatch(setWordEnglish(word)));
         }
     }, [word])
@@ -47,8 +42,9 @@ export function OneSection() {
 
 export function TwoSection() {
 
-    const {cutWord, isLoading, wordUse, indexWord, wordsSimilar} = useSelector(state => state.notorious)
+    const {cutWord, wordUse, indexWord, wordsSimilar, isLoading, wordEnglish, flagWordSimilar} = useSelector(state => state.notorious)
     const dispatch = useDispatch()
+    const {wordSimilar, isLoadingWordSimilar} = useGetWordsSimilar(wordEnglish, flagWordSimilar)
 
     const nextWord = () => {
         if (cutWord?.length === 0) return;
@@ -69,11 +65,17 @@ export function TwoSection() {
         dispatch(setCutWord(words))
     }, [wordsSimilar])
 
+    //Guardar palabra similar y parar el fetch
+    useEffect(() => {
+        if (wordSimilar) dispatch(setWordsSimilar(wordSimilar?.content))
+        if (!isLoadingWordSimilar) dispatch(setFlagWordsSimilar(false))
+    }, [wordSimilar])
+
     return (
         <>
             <div className={styles.similarWordCenter}>
                 {
-                    isLoading && wordUse?.length === 0
+                    isLoadingWordSimilar && wordUse?.length === 0
                         ? (<Loader/>)
                         : (wordUse)
                 }
@@ -91,9 +93,23 @@ export function TwoSection() {
 }
 
 export function ThreeSection() {
-    const {isLoading, wordUse, idea} = useSelector(state => state.notorious)
+    const dispatch = useDispatch()
+    const {wordUse, idea, word, flagIdea} = useSelector(state => state.notorious)
 
-    return isLoading && wordUse?.length > 0
+    //SWR: Fetching
+    const {ideaText, isLoadingIdea} = useGetIdea(word, wordUse, flagIdea)
+
+    //Guardar idea y parar el fetch
+    useEffect(() => {
+        if (ideaText) {
+            const idea = IdeaFormatter(ideaText?.content, word, wordUse)
+            dispatch(setIdea(idea))
+        }
+        if (!isLoadingIdea) dispatch(setFlagIdea(false))
+    }, [ideaText])
+
+
+    return isLoadingIdea
         ? (<Loader/>)
         : (<div dangerouslySetInnerHTML={{__html: idea}}></div>)
 }

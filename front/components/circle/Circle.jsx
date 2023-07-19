@@ -1,12 +1,12 @@
 "use client"
 
-import {Container} from "@styles/CircleStyles"
 import {AllStars} from "@components/circle/LightGreen";
+import Styles from "@styles/circle.module.css"
 
 const Circle = () =>
-    <Container>
+    <div className={Styles.container}>
         <AllStars/>
         <AllStars FlipHorizontal={true}/>
-    </Container>
+    </div>
 
 export default Circle

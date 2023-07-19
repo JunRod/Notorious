@@ -1,0 +1,38 @@
+.lightEffect {
+    position: absolute;
+    height: 10px;
+    width: 90px;
+    background-color: white;
+    filter: blur(1.2rem) opacity(20%);
+    bottom: 3.8rem;
+}
+
+.container {
+    cursor: pointer;
+    top: 530px;
+    z-index: 270;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: radial-gradient( farthest-side at 118px 0px, #ffe7ff 20%, #FF5AFF);
+}
+
+.container::before {
+    position: absolute;
+    content: "";
+    height: 85%;
+    width: 97.5%;
+    background-color: black;
+}
+
+.container::after {
+    content: "";
+    height: 60%;
+    top: 0;
+    width: 95%;
+    position: absolute;
+    background: radial-gradient(farthest-side at 118px 0px, #FFF8FF 20%, #FF5AFF 70%);
+    z-index: -10;
+    filter: blur(2rem);
+}

@@ -101,3 +101,10 @@ __________________________________________________________
 -> Donación
 Esta es una versión prueba de Notorious. Su donación hará que Notorious sea accesible ilimitadamente para cualquier usuario como también apoyará nuestro trabajo.
 Si dona, se le avisará inmediatamente al correo la disponibilidad ilimitada de Notorious.
+
+
+//Proximas cosas:
+decirle a gpt que me tire la lista pero en orden numerico
+decirle que me tire la idea pero dentro de comillar
+asi formateamos mejor
+

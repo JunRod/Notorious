@@ -1,5 +1,5 @@
 import { orbitron, PixelPublic } from "@fonts";
-import { Ious, Notor } from "@styles/TitleStyles";
+import { Ious, Notor } from "@styles/Title";
 
 const Words = () => {
   return (

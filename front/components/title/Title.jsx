@@ -10,7 +10,7 @@ import {
   TitleComponent,
   TitleComponents3DEffect,
   TitleComponentsBlur,
-} from "@styles/TitleStyles";
+} from "@styles/Title";
 import { useRef } from "react";
 import Words from "./Words";
 

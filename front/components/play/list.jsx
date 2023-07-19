@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {orbitron} from "@fonts";
 import words from "@app/play/words.json";
 import {setWord} from "@store/play/notoriousSlice";
-import DocumentationStyle from "@styles/DocumentationStyles.module.css";
+import DocumentationStyle from "@styles/Documentation.module.css";
 
 function List() {
 

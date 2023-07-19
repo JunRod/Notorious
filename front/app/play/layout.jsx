@@ -1,6 +1,6 @@
-import NotoriousStyles from "@styles/NotoriousStyles.module.css"
+import NotoriousStyles from "@styles/Notorious.module.css"
 import {orbitron} from "@fonts";
-import DocumentationStyle from "@styles/DocumentationStyles.module.css";
+import DocumentationStyle from "@styles/Documentation.module.css";
 import Link from "next/link";
 import List from "@components/play/list";
 

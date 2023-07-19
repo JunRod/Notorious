@@ -1,7 +1,7 @@
 "use client"
 
 import {useEffect, useState} from "react";
-import DocumentationStyle from "@styles/DocumentationStyles.module.css";
+import DocumentationStyle from "@styles/Documentation.module.css";
 import {orbitron} from "@fonts";
 import data from "@components/data.json"
 

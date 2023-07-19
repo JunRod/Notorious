@@ -1,9 +1,8 @@
-import style from "@styles/NotoriousViewStyles.module.css"
+import style from "@styles/NotoriousView.module.css"
 import {orbitron} from "@fonts";
 import ButtonLimit from "@components/play/button/buttonLimit";
 import {OneSection, ThreeSection, TwoSection} from "@components/play/sections/sections";
 import Image from "@components/play/image";
-import {getWordsSimilar} from "@api/api";
 
 function Page() {
     return (
