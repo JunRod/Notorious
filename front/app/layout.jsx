@@ -1,19 +1,23 @@
 import "@styles/globals.css"
 import StyledComponentsRegistry from "@utils/registry"
 import Documentation from "@components/documentation";
-import ProviderPage from "@app/ProviderPage";
+import ProviderPage from "@components/ProviderPage";
+import ProviderNextAuth from "@components/ProviderNextAuth";
+
 
 const layout = ({children}) => {
     return (
         <html lang="en">
-          <body>
-          <StyledComponentsRegistry>
-              <ProviderPage>
-                {children}
-              </ProviderPage>
-              <Documentation/>
-          </StyledComponentsRegistry>
-          </body>
+        <body>
+        <StyledComponentsRegistry>
+            <ProviderNextAuth>
+                <ProviderPage>
+                    {children}
+                </ProviderPage>
+            </ProviderNextAuth>
+            <Documentation/>
+        </StyledComponentsRegistry>
+        </body>
         </html>
     )
 }

@@ -1,15 +1,13 @@
-import {cache} from "react"
 import useSWR from "swr";
 
 const fetcher = (...args) => fetch(`https://notoriousback.ddns.net/${args}`).then(res => res.json())
 
 export function useGetWordsSimilar(wordEnglish, flag) {
-    const {data, error, isLoading} = useSWR(flag ? `words?word=${wordEnglish}`: null, fetcher)
+    const {data: wordSimilar, isLoading: isLoadingWordSimilar} = useSWR(flag ? `words?word=${wordEnglish}`: null, fetcher)
 
     return {
-        wordSimilar: data,
-        isLoadingWordSimilar: isLoading,
-        isError: error
+        wordSimilar,
+        isLoadingWordSimilar,
     }
 }
 

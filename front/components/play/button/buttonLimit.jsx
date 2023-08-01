@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import HookTemporization from "@components/HookTemporization";
 import {useEffect, useState} from "react";
 import {
-    setButtonText, setFlagIdea, setFlagWordsSimilar, setIsDisabled,
+    setButtonText, setFlagIdea, setFlagWordsSimilar, setIsDisabled, setSaveAssociation, setSaveAssocitation,
 } from "@store/play/notoriousSlice";
 import {toast, Toaster} from "sonner";
 
@@ -16,74 +16,64 @@ function ButtonLimit() {
     //Redux Toolkit
     const dispatch = useDispatch()
     const {
-        isDisabled, wordUse, buttonText, wordEnglish, b64_json, word,
+        isDisabled, wordUse, buttonText, wordEnglish, b64_json, idea, flagWordSimilar, flagIdea, flagImage
     } = useSelector(state => state.notorious)
 
-    //Made
-    const {counter, state, start} = HookTemporization(false)
-    const [limitNumber, setLimitNumber] = useState(0)
-
-    //Palancas de activacion para ir a los puntos finales
+    //Controllers por activar
     function fetchAll() {
         if (wordEnglish?.length === 0) return
 
+        //Si no hay nada en palabra similar, activamos el controlador para obtener la idea similar
         if (wordUse?.length === 0) {
             dispatch(setFlagWordsSimilar(true))
-        } else {
+            return
+        }
+        //Si no hay nada en la idea entonces activamos el controlador de obtener la idea
+        if (!idea) {
             dispatch(setFlagIdea(true))
+            return
+        }
+        //Si se rellenó todo, guardamos la asociacion
+        if (b64_json?.length > 0) {
+            dispatch(setSaveAssociation(true))
         }
     }
 
-    //Controlamos cuando podemos hacer peticiones y cuando ya no
-    useEffect(() => {
-        if (limitNumber < 3 && limitNumber > 0) {
-            fetchAll()
-            if (limitNumber === 2) {
-                toast.error("Solo se puede memorizar 1 palabra por minuto")
-                start(true)
-                dispatch(setIsDisabled(true))
-            }
-        }
-    }, [limitNumber])
-
-    //Controlamos el limite de peticiones
-    useEffect(() => {
-        if (!state) dispatch(setIsDisabled(false))
-        setLimitNumber(0)
-    }, [state])
-
-    useEffect(() => {
-        setLimitNumber(0)
-    }, [word])
-
     //Controla los estados del boton
     useEffect(() => {
+        //Si no tiene una palabra similar
         if (wordUse?.length === 0) {
             dispatch(setButtonText("Generar palabra similar"))
-        } else {
+        }
+        //Si tiene una palabra similar
+        if (wordUse?.length > 0) {
             dispatch(setButtonText("Generar Idea a Memorizar"))
         }
-        if (wordEnglish?.length === 0) {
+        //Si la imagen esta llena
+        if (b64_json?.length > 0) {
+            dispatch(setButtonText("Guardar asociación"))
+        }
+    }, [wordUse, b64_json])
+
+    useEffect(() => {
+        //Disable si no escogió ninguna palabra
+        if (wordEnglish?.length === 0 || flagWordSimilar || flagIdea || flagImage) {
             dispatch(setIsDisabled(true))
         } else {
             dispatch(setIsDisabled(false))
         }
-        //Si image estan llenos, disabled en el boton
-        if (b64_json?.length > 0) {
-            dispatch(setIsDisabled(true))
-        }
-    }, [wordUse, b64_json, wordEnglish])
+
+    }, [wordEnglish, flagWordSimilar, flagIdea, flagImage])
 
     return (<>
-
-            <Toaster position="bottom-right"/>
-            <button onClick={() => setLimitNumber(prev => prev + 1)}
-                    className={`${styles.button} ${isDisabled && styles.disabled} ${orbitron.className}`}
-                    disabled={isDisabled}
-            >
-                {isDisabled ? counter : buttonText}
-            </button>
-        </>);
+        <Toaster position="bottom-right"/>
+        <button onClick={fetchAll}
+                className={`${styles.button} ${isDisabled && styles.disabled} ${orbitron.className}`}
+                disabled={isDisabled}
+        >
+            {buttonText}
+        </button>
+    </>);
 }
 
 export default ButtonLimit;

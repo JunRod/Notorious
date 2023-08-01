@@ -3,7 +3,7 @@
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {orbitron} from "@fonts";
-import words from "@app/play/words.json";
+import words from "@components/words.json";
 import {setWord} from "@store/play/notoriousSlice";
 import DocumentationStyle from "@styles/Documentation.module.css";
 

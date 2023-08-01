@@ -4,16 +4,18 @@ import {useEffect} from "react";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    setCutWord, setFlagIdea, setFlagWordsSimilar,
+    setB64_json,
+    setButtonText,
+    setCutWord, setFlagIdea, setFlagImage, setFlagWordsSimilar,
     setIdea,
-    setIndexWord,  setWord,
+    setIndexWord, setIsDisabled, setIsLoading, setWord,
     setWordEnglish,
     setWordsSimilar,
     setWordUse
 } from "@store/play/notoriousSlice";
 import styles from "@styles/NotoriousView.module.css";
 import Loader from "@components/Loader";
-import words from "@app/play/words.json";
+import words from "@components/words.json";
 import {IdeaFormatter, WordsSimilarFormatter} from "@components/play/helpers";
 import {useGetIdea, useGetWordsSimilar} from "@api/api";
 
@@ -24,6 +26,19 @@ export function OneSection() {
     useEffect(() => {
         if (word.length > 0) {
             dispatch(setWord(word))
+                dispatch(setWordEnglish(""))
+                dispatch(setWordsSimilar(""))
+                dispatch(setCutWord(""))
+                dispatch(setIndexWord(0))
+                dispatch(setWordUse(""))
+                dispatch(setIdea(null))
+                dispatch(setIsLoading(null))
+                dispatch(setIsDisabled(true))
+                dispatch(setButtonText("Generar palabra similar"))
+                dispatch(setB64_json(""))
+                dispatch(setFlagWordsSimilar(false))
+                dispatch(setFlagIdea(false))
+                dispatch(setFlagImage(false))
             Object.values(words[word]).map(word => dispatch(setWordEnglish(word)));
         }
     }, [word])
@@ -42,30 +57,31 @@ export function OneSection() {
 
 export function TwoSection() {
 
-    const {cutWord, wordUse, indexWord, wordsSimilar, isLoading, wordEnglish, flagWordSimilar} = useSelector(state => state.notorious)
+    const {cutWord, wordUse, indexWord, wordsSimilar, wordEnglish, flagWordSimilar} = useSelector(state => state.notorious)
     const dispatch = useDispatch()
     const {wordSimilar, isLoadingWordSimilar} = useGetWordsSimilar(wordEnglish, flagWordSimilar)
 
+    //Para avanzar al siguiente indice del array de palabras
     const nextWord = () => {
         if (cutWord?.length === 0) return;
-
         const index = indexWord === cutWord?.length - 1 ? 0 : indexWord + 1
-
         dispatch(setIndexWord(index));
     };
 
+    //Mostrar la siguiente palabara del array
     useEffect(() => {
         if (cutWord && cutWord.length > 0 && indexWord >= 0 && indexWord < cutWord.length) {
             dispatch(setWordUse(cutWord[indexWord]));
         }
     }, [cutWord, indexWord]);
 
+    //Formatear las palabras similares y guardarlas en un array
     useEffect(() => {
         const words = WordsSimilarFormatter(wordsSimilar)
         dispatch(setCutWord(words))
     }, [wordsSimilar])
 
-    //Guardar palabra similar y parar el fetch
+    //Guardar palabras similar y parar el fetch
     useEffect(() => {
         if (wordSimilar) dispatch(setWordsSimilar(wordSimilar?.content))
         if (!isLoadingWordSimilar) dispatch(setFlagWordsSimilar(false))
@@ -94,9 +110,9 @@ export function TwoSection() {
 
 export function ThreeSection() {
     const dispatch = useDispatch()
-    const {wordUse, idea, word, flagIdea} = useSelector(state => state.notorious)
+    const {wordUse, idea, word, flagIdea, saveAssociation} = useSelector(state => state.notorious)
 
-    //SWR: Fetching
+    //SWR: Fetching idea
     const {ideaText, isLoadingIdea} = useGetIdea(word, wordUse, flagIdea)
 
     //Guardar idea y parar el fetch
@@ -107,6 +123,14 @@ export function ThreeSection() {
         }
         if (!isLoadingIdea) dispatch(setFlagIdea(false))
     }, [ideaText])
+
+    //Guardar asociacion
+    useEffect(() => {
+        if(saveAssociation) {
+
+        }
+
+    }, [saveAssociation])
 
 
     return isLoadingIdea

@@ -14,7 +14,8 @@ const initialState = {
     b64_json: "",
     flagWordSimilar: false,
     flagIdea: false,
-    flagImage: false
+    flagImage: false,
+    saveAssociation: false
 }
 
 export const notoriousSlice = createSlice({
@@ -62,6 +63,9 @@ export const notoriousSlice = createSlice({
         }
         ,setFlagImage: (state, {payload}) => {
             state.flagImage = payload
+        },
+        setSaveAssociation: (state, {payload}) => {
+            state.saveAssociation = payload
         }
     }
 });
@@ -81,5 +85,6 @@ export const {
     setB64_json,
     setFlagWordsSimilar,
     setFlagIdea,
-    setFlagImage
+    setFlagImage,
+    setSaveAssociation
 } = notoriousSlice.actions;

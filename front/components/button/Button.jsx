@@ -2,7 +2,6 @@ import { orbitron } from "@fonts";
 import Link from "next/link";
 import Styles from "@styles/Button.module.css";
 
-
 const styles = {
     background: 'radial-gradient(farthest-side at 118px 7px, #FFF8FF, #FF5AFF 70%)',
     fontSize: '2.3rem',
