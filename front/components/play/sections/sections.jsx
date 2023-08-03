@@ -18,6 +18,7 @@ import Loader from "@components/Loader";
 import words from "@components/words.json";
 import {IdeaFormatter, WordsSimilarFormatter} from "@components/play/helpers";
 import {useGetIdea, useGetWordsSimilar} from "@api/api";
+import {useSession} from "next-auth/react";
 
 export function OneSection() {
     const dispatch = useDispatch()
@@ -110,7 +111,8 @@ export function TwoSection() {
 
 export function ThreeSection() {
     const dispatch = useDispatch()
-    const {wordUse, idea, word, flagIdea, saveAssociation} = useSelector(state => state.notorious)
+    const {wordUse, idea, word, flagIdea, saveAssociation, wordEnglish, wordSimilar} = useSelector(state => state.notorious)
+    const {data: session} = useSession()
 
     //SWR: Fetching idea
     const {ideaText, isLoadingIdea} = useGetIdea(word, wordUse, flagIdea)
@@ -125,10 +127,24 @@ export function ThreeSection() {
     }, [ideaText])
 
     //Guardar asociacion
-    useEffect(() => {
-        if(saveAssociation) {
+    useEffect( () => {
 
-        }
+        if(!session) return
+        const {username} = session
+
+        if(!saveAssociation) return
+
+        /*createNewForUser(username, wordEnglish, wordSimilar)*/
+
+        /*const user = await User.findOne({
+            where: { username },
+            include: {
+                model: WordsDinamics,
+                where: { word_english: wordEnglish }
+            }
+        });
+
+        console.log('Existe un registro asociado al usuario junior con la palabra "Get" ' + user.toJSON());*/
 
     }, [saveAssociation])
 

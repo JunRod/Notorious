@@ -1,7 +1,7 @@
 import NotoriousStyles from "@styles/Notorious.module.css"
 import DocumentationStyle from "@styles/Documentation.module.css";
 import List from "@components/play/list";
-import Header from "@components/Header/Header";
+import Header from "@components/header/Header";
 function Layout({children}) {
 
     return (

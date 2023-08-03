@@ -28,3 +28,4 @@ export function useGetImage(idea, flag) {
         isLoadingImage
     }
 }
+
