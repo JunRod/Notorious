@@ -3,6 +3,15 @@
 
 ## [Probar Notorious](https://notorious-learn.vercel.app/)
 
+## Tecnologías
+- React (Next 13 y NextAuth)
+- Java (SpringBoot y SpringData JPA)
+- MySQL
+- StyleComponents
+- Swr
+- Redux Toolkit
+- Sonner
+
 Notorious es una inteligencia artificial entrenado para ayudarte a aprender cualquier idioma extranjero en 7 días con el sistema de aprendizaje más efectivo.
 El sistema propuesto de aprendizaje se basa en el uso de asociaciones inverosímiles para memorizar vocabulario y datos puros, aprovechando los mecanismos automáticos e inconscientes de la mente.
 
@@ -33,12 +42,5 @@ Con la ayuda de Notorious:
 - Notorious crea automaticamente la idea inverosimil que incluyen las palabras sustitutorias. Algunos de tus cinco sentidos estarán involucrados en cada idea inverosimil para una asociación muy potente.
 - Notorious guarda automaticamente tus asociaciones ordenadamente para que las consultes en cualquier momento y obtengas mayor soltura y fluidéz.
 
-## Tecnologías
-- React (Next 13)
-- Java (SpringBoot y SpringData JPA)
-- MySQL
-- StyleComponents
-- Swr
-- Redux Toolkit
-- Sonner
+
 
