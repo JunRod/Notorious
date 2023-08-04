@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^4.39.3",
     "@reduxjs/toolkit": "^1.9.5",
     "env": "^0.0.2",
     "next": "^13.4.7",
@@ -19,8 +20,5 @@
     "sonner": "^0.6.2",
     "styled-components": "^5.3.11",
     "swr": "^2.2.0"
-  },
-  "devDependencies": {
-    "@netlify/plugin-nextjs": "^4.39.3"
   }
 }
