@@ -1,0 +1,2 @@
+cd Desktop/Notorious
+scp -i key/id_rsa target/BackendNotorious-0.0.1-SNAPSHOT.jar root@167.99.155.175:/artifact

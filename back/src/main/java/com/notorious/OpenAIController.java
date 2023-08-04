@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000", "https://notorious-learn.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://notorious-799tu.ondigitalocean.app"})
 @RestController("/")
 public class OpenAIController {
     Object response;
