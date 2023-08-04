@@ -13,14 +13,14 @@ async function Header() {
     //Obtener el usuario logeado
     if (session) {
         const {username} = session
-        const resp = await fetch(`http://localhost:8080/getUser?username=${username}`)
+        const resp = await fetch(`https://notoriousback.ddns.net/getUser?username=${username}`)
         queryVerification =  await resp.json()
     }
 
     //Crear nuevo usuario si no existe
     if (session && !queryVerification?.username) {
         const {username, password} = session
-        const resp = await fetch(`http://localhost:8080/add?username=${username}&password=${password}`, {
+        const resp = await fetch(`https://notoriousback.ddns.net/add?username=${username}&password=${password}`, {
             method: 'POST'
         })
         queryVerification = await resp.json()
@@ -31,7 +31,9 @@ async function Header() {
             <Link  style={{color: "white"}} href={"/"} prefetch>
                 Notorious
             </Link>
-            Bienvenido {queryVerification.username}!
+            {
+                queryVerification?.username ? `¡Bievenido ${queryVerification?.username}!` : <></>
+            }
             <Button/>
         </div>
     );

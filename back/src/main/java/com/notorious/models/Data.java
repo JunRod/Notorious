@@ -1,10 +1,7 @@
-package com.accessingdatamysql.models;
+package com.notorious.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class Data {
@@ -25,6 +22,13 @@ public class Data {
     private String wordEnglish;
 
     private String wordSimilar;
+
+    @Column(length = 50000)
+
+    private String idea;
+
+    @Column(length = 50000)
+    private String image;
 
     public User getUser() {
         return user;
@@ -48,5 +52,21 @@ public class Data {
 
     public void setWordSimilar(String wordSimilar) {
         this.wordSimilar = wordSimilar;
+    }
+
+    public String getIdea() {
+        return idea;
+    }
+
+    public void setIdea(String idea) {
+        this.idea = idea;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

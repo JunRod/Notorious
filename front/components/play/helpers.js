@@ -1,4 +1,4 @@
-import {toast} from "sonner";
+import {data} from "@components/words";
 
 export function WordsSimilarFormatter (wordsSimilar) {
 
@@ -20,3 +20,4 @@ export function IdeaFormatter (data, word, wordUse) {
         `<span style="color: red">${match}</span>`
     );
 }
+

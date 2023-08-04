@@ -11,10 +11,13 @@ import {
   TitleComponents3DEffect,
   TitleComponentsBlur,
 } from "@styles/Title";
-import { useRef } from "react";
+import {useEffect, useRef} from "react";
 import Words from "./Words";
+import {useDispatch} from "react-redux";
+import {setWord, setWordEnglish} from "@store/play/notoriousSlice";
 
 const Title = () => {
+    const dispatch = useDispatch()
   const ref = useRef(null);
   const { x, y } = useFollowPointer(ref);
 
@@ -22,6 +25,11 @@ const Title = () => {
     x: x + 620,
     y: y + 40,
   };
+
+  useEffect(() => {
+      dispatch(setWord(""))
+      dispatch(setWordEnglish(""))
+  }, [])
 
   return (
     <Cursor ref={ref}>

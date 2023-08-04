@@ -1,4 +1,4 @@
-package com.accessingdatamysql.models;
+package com.notorious.models;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

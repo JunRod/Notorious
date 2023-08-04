@@ -4,44 +4,59 @@ import {useEffect} from "react";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import {
+    setAssociations,
     setB64_json,
     setButtonText,
     setCutWord, setFlagIdea, setFlagImage, setFlagWordsSimilar,
     setIdea,
-    setIndexWord, setIsDisabled, setIsLoading, setWord,
+    setIndexWord, setIsDisabled, setIsLoading, setSaveAssociation, setWord,
     setWordEnglish,
     setWordsSimilar,
     setWordUse
 } from "@store/play/notoriousSlice";
 import styles from "@styles/NotoriousView.module.css";
 import Loader from "@components/Loader";
-import words from "@components/words.json";
+import {data} from "@components/words.js";
 import {IdeaFormatter, WordsSimilarFormatter} from "@components/play/helpers";
 import {useGetIdea, useGetWordsSimilar} from "@api/api";
 import {useSession} from "next-auth/react";
+import {Toaster, toast} from "sonner";
+import {orbitron} from "@fonts";
+import style from "@styles/Documentation.module.css";
 
 export function OneSection() {
     const dispatch = useDispatch()
     const {word, wordEnglish} = useSelector(state => state.notorious)
 
+    //Reiniciar todo
     useEffect(() => {
-        if (word.length > 0) {
-            dispatch(setWord(word))
-                dispatch(setWordEnglish(""))
-                dispatch(setWordsSimilar(""))
-                dispatch(setCutWord(""))
-                dispatch(setIndexWord(0))
-                dispatch(setWordUse(""))
-                dispatch(setIdea(null))
-                dispatch(setIsLoading(null))
-                dispatch(setIsDisabled(true))
-                dispatch(setButtonText("Generar palabra similar"))
-                dispatch(setB64_json(""))
-                dispatch(setFlagWordsSimilar(false))
-                dispatch(setFlagIdea(false))
-                dispatch(setFlagImage(false))
-            Object.values(words[word]).map(word => dispatch(setWordEnglish(word)));
-        }
+        dispatch(setWordsSimilar(""))
+        dispatch(setCutWord([]))
+        dispatch(setIndexWord(0))
+        dispatch(setWordUse(""))
+        dispatch(setIdea(null))
+        dispatch(setIsLoading(null))
+        dispatch(setIsDisabled(true))
+        dispatch(setButtonText("Generar palabra similar"))
+        dispatch(setB64_json(""))
+        dispatch(setFlagWordsSimilar(false))
+        dispatch(setFlagIdea(false))
+        dispatch(setFlagImage(false))
+        dispatch(setSaveAssociation(false))
+    }, [])
+
+    //Cada que word cambie, obtiene su traduccion tambien
+    useEffect(() => {
+        if (!word?.length > 0) return
+
+        dispatch(setWord(word))
+
+        data.forEach(words => {
+            const {wordSpanish, wordEnglish} = words
+            if (wordSpanish === word) {
+                dispatch(setWordEnglish(wordEnglish))
+            }
+        })
     }, [word])
 
     return (
@@ -58,7 +73,14 @@ export function OneSection() {
 
 export function TwoSection() {
 
-    const {cutWord, wordUse, indexWord, wordsSimilar, wordEnglish, flagWordSimilar} = useSelector(state => state.notorious)
+    const {
+        cutWord,
+        wordUse,
+        indexWord,
+        wordsSimilar,
+        wordEnglish,
+        flagWordSimilar
+    } = useSelector(state => state.notorious)
     const dispatch = useDispatch()
     const {wordSimilar, isLoadingWordSimilar} = useGetWordsSimilar(wordEnglish, flagWordSimilar)
 
@@ -111,7 +133,7 @@ export function TwoSection() {
 
 export function ThreeSection() {
     const dispatch = useDispatch()
-    const {wordUse, idea, word, flagIdea, saveAssociation, wordEnglish, wordSimilar} = useSelector(state => state.notorious)
+    const {idea, word, flagIdea, saveAssociation, wordEnglish, wordUse, associations, b64_json} = useSelector(state => state.notorious)
     const {data: session} = useSession()
 
     //SWR: Fetching idea
@@ -127,29 +149,82 @@ export function ThreeSection() {
     }, [ideaText])
 
     //Guardar asociacion
-    useEffect( () => {
+    useEffect(() => {
 
-        if(!session) return
-        const {username} = session
+        let isSaveCalled = false;
 
-        if(!saveAssociation) return
+        async function saveAssociationFunction() {
 
-        /*createNewForUser(username, wordEnglish, wordSimilar)*/
+            if (isSaveCalled) return; //Si ya se llamó no hace nada
+            isSaveCalled = true
 
-        /*const user = await User.findOne({
-            where: { username },
-            include: {
-                model: WordsDinamics,
-                where: { word_english: wordEnglish }
+            if (!session) return
+            const {username} = session
+
+            if (!saveAssociation) return
+
+            const data = {
+                usernameFK: username,
+                wordEnglish,
+                wordSimilar: wordUse,
+                idea: idea,
+                image: b64_json
             }
-        });
 
-        console.log('Existe un registro asociado al usuario junior con la palabra "Get" ' + user.toJSON());*/
+            const resp = await fetch(`https://notoriousback.ddns.net/addNewAssociation`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+
+            const result = await resp.text()
+
+            delete data.usernameFK
+
+            dispatch(setAssociations([...associations, data]))
+            toast(result)
+        }
+
+        saveAssociationFunction()
 
     }, [saveAssociation])
 
+    //Mostrar Associacion
+    useEffect(() => {
 
-    return isLoadingIdea
-        ? (<Loader/>)
-        : (<div dangerouslySetInnerHTML={{__html: idea}}></div>)
+        //Verificamos si la palabra en ingles se encuentra state associations.
+        const result = associations.filter(associationObj => {
+            const {wordEnglish: wordEnglishState} = associationObj
+            if(wordEnglishState === wordEnglish) return associationObj
+        })
+
+        //Si se encuentra quiere decir que podemos mostrar la associacion
+        if(result?.length > 0) {
+            const object = result[0]
+            const {wordSimilar, idea, image} = object
+
+            dispatch(setWordUse(wordSimilar))
+            dispatch(setB64_json(image))
+            dispatch(setIdea(idea))
+        } else {
+            //Si no encuentra, reiniciar los valores
+            dispatch(setWordUse(""))
+            dispatch(setB64_json(""))
+            dispatch(setIdea(""))
+        }
+
+    }, [wordEnglish])
+
+    return (
+        <>
+            <Toaster position="bottom-right"/>
+            {
+                isLoadingIdea
+                    ? (<Loader/>)
+                    : (<div dangerouslySetInnerHTML={{__html: idea}}></div>)
+            }
+        </>
+    )
 }

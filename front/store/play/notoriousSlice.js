@@ -4,7 +4,7 @@ const initialState = {
     word: "",
     wordEnglish: "",
     wordsSimilar: "",
-    cutWord: "",
+    cutWord: [],
     indexWord: 0,
     wordUse: "",
     idea: null,
@@ -15,7 +15,8 @@ const initialState = {
     flagWordSimilar: false,
     flagIdea: false,
     flagImage: false,
-    saveAssociation: false
+    saveAssociation: false,
+    associations: [],
 }
 
 export const notoriousSlice = createSlice({
@@ -66,6 +67,9 @@ export const notoriousSlice = createSlice({
         },
         setSaveAssociation: (state, {payload}) => {
             state.saveAssociation = payload
+        },
+        setAssociations: (state, {payload}) => {
+            state.associations = payload
         }
     }
 });
@@ -86,5 +90,6 @@ export const {
     setFlagWordsSimilar,
     setFlagIdea,
     setFlagImage,
-    setSaveAssociation
+    setSaveAssociation,
+    setAssociations
 } = notoriousSlice.actions;

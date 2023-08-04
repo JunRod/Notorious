@@ -4,23 +4,28 @@ import button from "@components/button/Button";
 import styles from "@styles/NotoriousView.module.css";
 import {orbitron} from "@fonts";
 import {useDispatch, useSelector} from "react-redux";
-import HookTemporization from "@components/HookTemporization";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {
-    setButtonText, setFlagIdea, setFlagWordsSimilar, setIsDisabled, setSaveAssociation, setSaveAssocitation,
+    setButtonText, setFlagIdea, setFlagWordsSimilar, setIsDisabled, setSaveAssociation,
 } from "@store/play/notoriousSlice";
-import {toast, Toaster} from "sonner";
+import {signIn, useSession} from "next-auth/react";
 
 function ButtonLimit() {
 
     //Redux Toolkit
     const dispatch = useDispatch()
     const {
-        isDisabled, wordUse, buttonText, wordEnglish, b64_json, idea, flagWordSimilar, flagIdea, flagImage
+        isDisabled, wordUse, buttonText, wordEnglish, b64_json, idea, flagWordSimilar, flagIdea, flagImage,
+        saveAssociation
     } = useSelector(state => state.notorious)
+    const {data: session} = useSession()
 
     //Controllers por activar
     function fetchAll() {
+        //Verifica que haya un usuario logeado antes de ejecutar los servicios
+        if(!session?.username) return signIn()
+
+        //Verifica que haya una palabra en ingles escogida.
         if (wordEnglish?.length === 0) return
 
         //Si no hay nada en palabra similar, activamos el controlador para obtener la idea similar
@@ -57,23 +62,20 @@ function ButtonLimit() {
 
     useEffect(() => {
         //Disable si no escogió ninguna palabra
-        if (wordEnglish?.length === 0 || flagWordSimilar || flagIdea || flagImage) {
+        if (wordEnglish?.length === 0 || flagWordSimilar || flagIdea || flagImage || saveAssociation) {
             dispatch(setIsDisabled(true))
         } else {
             dispatch(setIsDisabled(false))
         }
 
-    }, [wordEnglish, flagWordSimilar, flagIdea, flagImage])
+    }, [wordEnglish, flagWordSimilar, flagIdea, flagImage, saveAssociation])
 
-    return (<>
-        <Toaster position="bottom-right"/>
-        <button onClick={fetchAll}
-                className={`${styles.button} ${isDisabled && styles.disabled} ${orbitron.className}`}
-                disabled={isDisabled}
-        >
-            {buttonText}
-        </button>
-    </>);
+    return (<button onClick={fetchAll}
+                    className={`${styles.button} ${isDisabled && styles.disabled} ${orbitron.className}`}
+                    disabled={isDisabled}
+    >
+        {buttonText}
+    </button>);
 }
 
 export default ButtonLimit;

@@ -1,8 +1,10 @@
-package com.accessingdatamysql.request;
+package com.notorious.request;
 
 public class AssociationRequest {
     private String wordEnglish;
     private String wordSimilar;
+    private String idea;
+    private String image;
     private String usernameFK;
 
     public String getWordEnglish() {
@@ -19,6 +21,22 @@ public class AssociationRequest {
 
     public void setWordSimilar(String wordSimilar) {
         this.wordSimilar = wordSimilar;
+    }
+
+    public String getIdea() {
+        return idea;
+    }
+
+    public void setIdea(String idea) {
+        this.idea = idea;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getUsernameFK() {

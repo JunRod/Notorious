@@ -1,4 +1,5 @@
 import { useState, RefObject, useEffect } from "react";
+import {setWordEnglish} from "@store/play/notoriousSlice";
 
 export function useFollowPointer(ref) {
   const [point, setPoint] = useState({ x: 0, y: 0 });
