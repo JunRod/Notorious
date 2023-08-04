@@ -19,5 +19,8 @@
     "sonner": "^0.6.2",
     "styled-components": "^5.3.11",
     "swr": "^2.2.0"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.39.3"
   }
 }
